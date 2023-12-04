@@ -1,0 +1,158 @@
+#!/usr/bin/env python
+import rospy
+from geometry_msgs.msg import Twist
+from sensor_msgs.msg import CompressedImage
+from cv_bridge import CvBridge
+import cv2
+import numpy as np
+from std_msgs.msg import Float64
+
+class ControlLane:
+    def __init__(self):
+        rospy.init_node('control_lane', anonymous=True)
+        self.pub_cmd_vel = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+        self.bridge = CvBridge()
+        self.image_sub = rospy.Subscriber('/camera/image/compressed', CompressedImage, self.image_callback)
+        self.sub_lane = rospy.Subscriber('/control/lane', Float64, self.cbFollowLane, queue_size=1)
+        self.sub_max_vel = rospy.Subscriber('/control/max_vel', Float64, self.cbGetMaxVel, queue_size=1)
+        self.lastError = 0
+        self.MAX_VEL = 0.1
+        self.dist_coeffs = np.array([[-0.276064, 0.055951, -0.002627, -0.000392, 0.000000]])
+        self.camera_matrix = np.array([[154.30758,   0.     , 150.51915],
+           [0.     , 155.07511, 109.41527],
+           [0.     ,   0.     ,   1.     ]])
+        self.markerLength = 0.1
+        
+        #distancethreshol is the value where to stop the robot the moment it detects the aruco
+        self.distancethreshold = 0.6
+        # Use ArUco detection
+        self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        #self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_100)
+        self.twist = Twist()
+        self.corners, self.ids, self.rejectedImgPoints = None, None, None
+        self.flag = 0
+        self.stopped = False
+        self.counter = None  # Initialize the counter
+        self.detector_enabled = True  # Flag to control the ArUco detector state
+        self.interval_duration = rospy.Duration(6000)  # Set the interval duration in seconds
+        
+        rospy.on_shutdown(self.fnShutDown)
+        rospy.spin()
+
+    def image_callback(self, msg):
+        rospy.loginfo("Seen an image")
+        try:
+            np_arr = np.frombuffer(msg.data, np.uint8)
+            cv_image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+            gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
+
+            # Detect ArUco markers if the detector is enabled
+            if self.detector_enabled:
+                parameters = cv2.aruco.DetectorParameters()
+                detector = cv2.aruco.ArucoDetector(self.aruco_dict, parameters)
+                self.corners, self.ids, self.rejectedImgPoints = detector.detectMarkers(gray)
+                #print(self.corners)
+                rvec, tvec, _ = self.my_estimatePoseSingleMarkers(self.corners, self.markerLength, self.camera_matrix, self.dist_coeffs)
+                
+                if self.ids is not None and len(self.ids) > 0 and tvec[0][-1]<=self.distancethreshold:
+                    print('aruco distance is',tvec[0][-1])
+                    rospy.loginfo("ArUco detected!")
+                    self.stop_turtlebot()
+                    self.counter = rospy.Time.now()  # Update the class attribute counter
+                    self.detector_enabled = False  # Disable the detector
+
+        except Exception as e:
+            rospy.logerr(e)
+
+        # Check the counter status and resume if necessary
+        if self.counter is not None and (rospy.Time.now() - self.counter) > self.interval_duration:
+            self.resume_turtlebot()
+
+    def stop_turtlebot(self):
+        self.stopped = True
+        rospy.loginfo("Stopping hahah")
+        self.MAX_VEL = 0
+        self.twist.linear.x = 0
+        self.twist.linear.y = 0
+        self.twist.linear.z = 0
+        self.twist.angular.x = 0
+        self.twist.angular.y = 0
+        self.twist.angular.z = 0
+        self.pub_cmd_vel.publish(self.twist)
+        self.MAX_VEL = 0
+        rospy.sleep(15)
+        self.ids = None
+        self.MAX_VEL = 0.1
+
+    def cbGetMaxVel(self, max_vel_msg):
+        self.MAX_VEL = max_vel_msg.data
+
+    def cbFollowLane(self, desired_center):
+        self.ids = None
+        center = desired_center.data
+
+        error = center - 500
+
+        Kp = 0.0025
+        Kd = 0.007
+
+        angular_z = Kp * error + Kd * (error - self.lastError)
+        self.lastError = error
+
+        self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+        self.twist.linear.y = 0
+        self.twist.linear.z = 0
+        self.twist.angular.x = 0
+        self.twist.angular.y = 0
+        self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+        self.pub_cmd_vel.publish(self.twist)
+
+    def fnShutDown(self):
+        rospy.loginfo("Shutting down. cmd_vel will be 0")
+        twist = Twist()
+        twist.linear.x = 0
+        twist.linear.y = 0
+        twist.linear.z = 0
+        twist.angular.x = 0
+        twist.angular.y = 0
+        twist.angular.z = 0
+        self.pub_cmd_vel.publish(twist)
+
+    def resume_turtlebot(self):
+        self.ids = None
+        if self.stopped:
+            rospy.loginfo("Resuming TurtleBot3...")
+            self.twist.linear.x = 0.1  # Set the desired linear velocity
+            self.pub_cmd_vel.publish(self.twist)
+            rospy.sleep(2)
+            self.stopped = False
+            self.detector_enabled = True  # Enable the detector
+    def my_estimatePoseSingleMarkers(self, corners, marker_size, mtx, distortion):
+        '''
+        This will estimate the rvec and tvec for each of the marker corners detected by:
+        corners, ids, rejectedImgPoints = detector.detectMarkers(image)
+        corners - is an array of detected corners for each detected marker in the image
+        marker_size - is the size of the detected markers
+        mtx - is the camera matrix
+        distortion - is the camera distortion matrix
+        RETURN list of rvecs, tvecs, and trash (so that it corresponds to the old estimatePoseSingleMarkers())
+        '''
+        marker_points = np.array([[-marker_size / 2, marker_size / 2, 0],
+                                [marker_size / 2, marker_size / 2, 0],
+                                [marker_size / 2, -marker_size / 2, 0],
+                                [-marker_size / 2, -marker_size / 2, 0]], dtype=np.float32)
+        trash = []
+        rvecs = []
+        tvecs = []
+        for c in corners:
+            nada, R, t = cv2.solvePnP(marker_points, c, mtx, distortion, False, cv2.SOLVEPNP_IPPE_SQUARE)
+            rvecs.append(R)
+            tvecs.append(t)
+            trash.append(nada)
+        return rvecs, tvecs, trash
+if __name__ == '__main__':
+    try:
+        node = ControlLane()
+
+    except rospy.ROSInterruptException:
+        pass
