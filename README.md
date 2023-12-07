@@ -1,9 +1,5 @@
-# Autonomous-Driving Turtlebot3 Using Camera based Lane Tracking
-
-Supervised by: Renato Martins (@renatojmsdh) DUVERNE Raphael  (@duverneraphael) Joaquin Jorge Rodriguez (@joako1991) 
-Submitted By: Mutte Ur Rehman (@muttequrashi) Hussein Loubani (@husein-loubani)
-
-![Cover](images/cover.png)
+# Turtlebot3 and Niryo Ned2 Working together
+### Group3: Nauman Shafique HASHMI ADEWALE Atanda Qian Zhiling
 
 ## Project Goal
 Autonomous Driving of a Ground Differential Robot by Perception based on [Autorace Challenge][1]. Main task was to detect the lanes and make the robot follow lane and complete the mission. In the circuit provided robot has to go through a low light tunnel also.
