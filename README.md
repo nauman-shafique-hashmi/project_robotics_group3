@@ -382,7 +382,7 @@ Final lane detection on
 **Complete Run Video.
 
 <p float="middle">
-  <img src="images/complete.gif"/>
+  <img src="images/tb_moving.gif"/>
 </p>
 
 [1]:https://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#autonomous-driving
