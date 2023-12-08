@@ -5,6 +5,11 @@
 ### Intro/Project Abstract:
 The autonomous driving meaning enabling robot drive itself without any external intervention, is the future of industrialization. In the current era of industrial automation where many many of the jobs are replaced by the autonomous robots describes its need to learn about it . In this practical project, We did the configuration and parameter tuning of the Turtlebot3 Burger based on ROS in order to detect lanes, which is an essential part of a autonomous driving robot. The project mainly covers the following things: camera intrinsic calibration, camera extrinsic calibration, parameter tuning for lane detection and autonomous driving based on lane detection. It also includes configuring Niryo Ned 2 with the local network used for our remote PC and SBC (TurtleBot3) and establishing a communication link among them using ROS_MASTER_URI so that Niryo Ned2 can pick an object from his workspace and place it on top of the TurtleBot3 whenever he asks for it. 
 
+## Technologies 
+The key technologies used in this project can be divided into four parts: environment perception, behavior decision-making, path planning and motion control. Let's briefly introduce the composition of autonomous driving technology from both hardware and software aspects
+### Reason to Use a Camera for Autonomous Driving with TurtleBot3:
+The TurtleBot3 provided by the lab comes with both LIDAR and the camera. But the reason to use a Camera for Autonomous Driving with TurtleBot3 was quite obvious. Because the problem in hand is an Image-based perception task where we need color and texture Information which is used in object detection such as lane detection and ArUco marker detection. Which is not possible with LIDAR that primarily provides distance and 3D positional information only.
+
 
 ## Required Libraries and Packages to Start
       ros-noetic-image-transport 
