@@ -68,7 +68,7 @@ And tangential distortion:
 
 ![Qian!](/images/14.png "bla")
 
-### Callibration Result:
+### Callibration Results:
 
 <div style="display: flex; justify-content: center;">
     <figure style="margin-right: 20px;">
@@ -80,7 +80,8 @@ And tangential distortion:
         <figcaption>After Calibration</figcaption>
     </figure>
 </div>
-![Qian!](/images/extrinsic_calibration.png "bla")
+
+![Qian!](/images/extrinsic_calibrtion.png "bla") 
 
 ##### This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
 
