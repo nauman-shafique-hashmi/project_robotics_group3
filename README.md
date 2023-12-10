@@ -79,9 +79,15 @@ And tangential distortion:
         <img src="images/after_intrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
         <figcaption>After Calibration</figcaption>
     </figure>
-     <figure>
-        <img src="images/extrinsic_calibration.png" alt="Image 3" style="width: 300px; height: auto;" />
+    <figure>
+        <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
+        <figcaption>Before Calibration</figcaption>
     </figure>
+     <figure>
+        <img src="images/after_extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
+        <figcaption>After Calibration</figcaption>
+    </figure>
+    
 </div>
 
 ##### This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
