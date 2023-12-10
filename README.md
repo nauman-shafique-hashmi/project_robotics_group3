@@ -17,6 +17,17 @@ Barrel distortion causes parallel lines to curve outward, while Pincushion disto
 ### Maths:
 
 ![Qian!](/images/1.png "bla")
+![Qian!](/images/2.png "bla")
+![Qian!](/images/3.png "bla")
+![Qian!](/images/4.png "bla")
+![Qian!](/images/5.png "bla")
+![Qian!](/images/6.png "bla")
+![Qian!](/images/7.png "bla")
+![Qian!](/images/8.png "bla")
+![Qian!](/images/9.png "bla")
+![Qian!](/images/10.png "bla")
+![Qian!](/images/11.png "bla")
+![Qian!](/images/12.png "bla")
 
 
 ## Required Libraries and Packages to Start
