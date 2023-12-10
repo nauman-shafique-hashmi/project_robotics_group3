@@ -72,11 +72,11 @@ And tangential distortion:
 
 <div style="display: flex; justify-content: center;">
     <figure style="margin-right: 20px;">
-        <img src="images/before_intrinsic_calibration" alt="Image 1" style="width: 300px; height: auto;" />
+        <img src="images/before_intrinsic_calibration.png" alt="Image 1" style="width: 300px; height: auto;" />
         <figcaption>Before Calibration</figcaption>
     </figure>
     <figure>
-        <img src="images/after_intrinsic_calibration" alt="Image 2" style="width: 300px; height: auto;" />
+        <img src="images/after_intrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
         <figcaption>After Calibration</figcaption>
     </figure>
 </div>
