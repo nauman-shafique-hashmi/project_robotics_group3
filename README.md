@@ -64,6 +64,11 @@ Finally, we need to mention that the automatic calibration tools considered Tack
 
 ![Qian!](/images/13.png "bla")
 
+And tangential distortion:
+
+![Qian!](/images/14.png "bla")
+
+
 ## Required Libraries and Packages to Start
       ros-noetic-image-transport 
       ros-noetic-cv-bridge 
