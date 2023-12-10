@@ -1,5 +1,5 @@
 # Turtlebot3 and Niryo Ned2 Working together
-#### Group3: Nauman Shafique HASHMI ADEWALE Atanda Qian Zhiling
+#### Group3: Nauman Shafique HASHMI, Atanda Abdullahi Adewale and Qian Zhiling
 
 ## Intro/Project Abstract:
 
