@@ -507,9 +507,9 @@ Then set network group:
     export ROS_MASTER_URI=http://192.168.0.100:11311
     export ROS_IP=192.168.0.100
 </pre>
-on Pc, repeat on TB3 and Niryo, set their IP respectively.  
+on Pc, repeat on TB3 and Niryo, set their IP respectively. ping the PC or telnet 192.168.0.100 11311 from each robot toconfirm connection.   
 
-Create a with a node <b>ned2.py</b>, make executable with <pre> chmod +x ned2.py </pre>
+Create a packeage <b>robot_com</b> with a node <b>ned2.py</b>, make executable with <pre> chmod +x ned2.py </pre>
 make a msg dir, for custom message below   
 
 Connectniryo.msg:
@@ -521,7 +521,7 @@ A custom ROS message type used for communication between TurtleBot3 and Niryo Ne
 
 dont forget to build the pacakge i.e <pre>catkin build </pre> in the workspace directory  
 
-
+use <pre>rosrun robot_com ned2<pre>
 
 
 [1]:https://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#autonomous-driving
