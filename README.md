@@ -7,11 +7,11 @@
 The autonomous driving meaning enabling robot drive itself without any external intervention, is the future of industrialization. In the current era of industrial automation where many many of the jobs are replaced by the autonomous robots describes its importance in robotics and a need for a study. 
 </p>
 <p>
-The objective of this project is to detect lane (yellow and white line in a different light conditions) perform autonomous lane driving of turtlebot3 (TB3) robot and to establish communication  a Niryo Ned2 robot in a ROS (Robot Operating System) environment. 
+The objective of this project is to detect lane (yellow and white line in a different light conditions) perform autonomous lane driving of turtlebot3 (TB3) robot and to establish communication a Niryo Ned2 robot in a ROS (Robot Operating System) environment. 
 </p> 
 <p>
 The project mainly covers the following things: camera intrinsic calibration, camera extrinsic calibration, Camera HSL parameter tuning for lane detection
-TurtleBot3 is then tasked with moving until it detects a QR ArUco tag, at which point it communicates with the Niryo Ned2 robot through ROS messages. The o Ned2 then performs certain actions {pick and place an object on TB3} and communicates back to the TurtleBot3 when done, allowing it to resume its movement
+TurtleBot3 is then tasked with moving until it detects a QR ArUco tag, at which point it communicates with the Niryo Ned2 robot through ROS messages. The Niryo Ned2 then performs certain actions {pick and place an object on TB3} and communicates back to the TurtleBot3 when done, allowing it to resume its movement
 </p>
 <p>
 To enable communication between the PC, acting as the ROS master, and TurtleBot3 as well as Niryo, the ROS_MASTER_URI and ROS_IP parameters on both robots are set to the PC's IP address to form a ROS network group, facilitating the exchange of information through ROS topics
