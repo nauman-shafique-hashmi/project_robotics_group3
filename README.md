@@ -16,6 +16,7 @@ Barrel distortion causes parallel lines to curve outward, while Pincushion disto
 
 ### Maths:
 We used the large checkerboard for Intrinsic Camera Calibration
+
 -Principles of Camera Imaging: 
 ![Qian!](/images/1.png "bla")
 Step 1: OpenCV did Harris corner detection first
