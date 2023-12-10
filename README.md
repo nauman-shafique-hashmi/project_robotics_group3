@@ -80,8 +80,14 @@ And tangential distortion:
         <figcaption>After Calibration</figcaption>
     </figure>
 </div>
+![Qian!](/images/extrinsic_calibration.png "bla")
 
-##### This picture taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
+##### This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
+
+### Lane Detection and Lane Following using AutoRace:
+Once the calibraiton process is not 
+
+
 
 ## Required Libraries and Packages to Start
       ros-noetic-image-transport 
