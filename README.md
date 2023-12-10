@@ -8,12 +8,11 @@ The autonomous driving meaning enabling robot drive itself without any external 
 
 ## Camera Calibration:
 
-Camera Calibration:
 No camera is 100% perfect, each comes with inherent imperfections, often stemming from aberrations caused by faulty lenses or assembly defects in camera parts. Primarily, lens-related distortions manifest as radial and tangential distortions. Radial distortions, namely Barrel and Pincushion distortions, are prevalent. These deviations hinder the preservation of straight or parallel lines, causing them to seemingly converge towards infinity, termed as the Vanishing Point.
 Barrel distortion causes parallel lines to curve outward, while Pincushion distortion makes parallel lines appear to curve inward. But there are some cameras which are deliberately made with those distortions. Such as cameras with Fish eye lenses. And the idea behind is that we can obtain a wider field of view with them. One of such camera is used in our project equipped with the following specifications: 
-•	Raspberry Pi Fish-eye Lens
-•	FOV: 160 degrees Diagonally
-•	Focal Length: 3.15mm
+- Raspberry Pi Fish-eye Lens
+- FOV: 160 degrees Diagonally
+- Focal Length: 3.15mm
 
 
 ## Required Libraries and Packages to Start
