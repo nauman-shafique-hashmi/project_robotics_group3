@@ -3,7 +3,15 @@
 
 ## Intro/Project Abstract:
 
-The autonomous driving meaning enabling robot drive itself without any external intervention, is the future of industrialization. In the current era of industrial automation where many many of the jobs are replaced by the autonomous robots describes its need to learn about it . In this practical project, We did the configuration and parameter tuning of the Turtlebot3 Burger based on ROS in order to detect lanes, which is an essential part of a autonomous driving robot. The project mainly covers the following things: camera intrinsic calibration, camera extrinsic calibration, parameter tuning for lane detection and autonomous driving based on lane detection. It also includes configuring Niryo Ned 2 with the local network used for our remote PC and SBC (TurtleBot3) and establishing a communication link among them using ROS_MASTER_URI so that Niryo Ned2 can pick an object from his workspace and place it on top of the TurtleBot3 whenever he asks for it. 
+<br>
+The autonomous driving meaning enabling robot drive itself without any external intervention, is the future of industrialization. In the current era of industrial automation where many many of the jobs are replaced by the autonomous robots describes its importance in robotics and a need for a study. 
+<br>
+The objective of this project is to detect lane (yellow and white line in a different light conditions) perform autonomous lane driving of turtlebot3 (TB3) robot and to establish communication  a Niryo Ned2 robot in a ROS (Robot Operating System) environment. 
+The project mainly covers the following things: camera intrinsic calibration, camera extrinsic calibration, Camera HSL parameter tuning for lane detection
+<br>
+The TurtleBot3 is then tasked with moving until it detects a QR ArUco tag, at which point it communicates with the Niryo Ned2 robot through ROS messages. The Niryo Ned2 then performs certain actions {pick and place an object on TB3} and communicates back to the TurtleBot3 when done, allowing it to resume its movement.
+<br>
+To enable communication between the PC, acting as the ROS master, and TurtleBot3 as well as Niryo, the ROS_MASTER_URI and ROS_IP parameters on both robots are set to the PC's IP address to form a ROS network group, facilitating the exchange of information through ROS topics 
 
 
 ## Camera Calibration:
