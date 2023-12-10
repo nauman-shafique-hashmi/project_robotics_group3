@@ -79,7 +79,6 @@ And tangential distortion:
         <img src="images/after_intrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
         <figcaption>After Calibration</figcaption>
     </figure>
-
      <figure>
         <img src="images/extrinsic_calibration.png" alt="Image 3" style="width: 300px; height: auto;" />
     </figure>
