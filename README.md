@@ -30,6 +30,7 @@ We set the world coordinate on the check board, so here R1 R2 means the first an
 ![Qian!](/images/4.png "bla")
 
 Step 3 solve intrinsic matrix:
+
 ![Qian!](/images/5.png "bla")
 Consider
 ![Qian!](/images/6.png "bla")
