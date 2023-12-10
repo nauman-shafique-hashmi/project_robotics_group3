@@ -9,7 +9,7 @@
 The autonomous driving meaning enabling robot drive itself without any external intervention, is the future of industrialization. In the current era of industrial automation where many many of the jobs are replaced by the autonomous robots describes its importance in robotics and a need for a study. 
 </p>
 <p>
-The objective of this project is to detect lane (yellow and white line in a different light conditions) perform autonomous lane driving of turtlebot3 (TB3) robot and to establish communication a Niryo Ned2 robot in a ROS (Robot Operating System) environment. 
+The objective of this project is to detect lane (yellow and white line in an unstable light condition) perform autonomous lane driving of turtlebot3 (TB3) robot and to establish communication a Niryo Ned2 robot in a ROS (Robot Operating System) environment. 
 </p> 
 <p>
 The project mainly covers the following things: camera intrinsic calibration, camera extrinsic calibration, Camera HSL parameter tuning for lane detection
