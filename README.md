@@ -15,9 +15,9 @@ Barrel distortion causes parallel lines to curve outward, while Pincushion disto
 - Focal Length: 3.15mm
 
 ### Maths:
+<img src="images/1.png" width="200" height="100">
 ![Qian!](/images/1.png "bla")
 ![Qian!](/images/1.png "bla")
-
 
 ## Required Libraries and Packages to Start
       ros-noetic-image-transport 
