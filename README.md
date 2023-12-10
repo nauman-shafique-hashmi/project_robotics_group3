@@ -81,7 +81,7 @@ And tangential distortion:
     </figure>
 </div>
 
-![Qian!](/images/extrinsic_calibrtion.png "bla") 
+![Qian!](/images/extrinsic_calibration.png "bla") 
 
 ##### This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
 
