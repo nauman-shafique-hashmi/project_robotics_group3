@@ -15,10 +15,6 @@ Barrel distortion causes parallel lines to curve outward, while Pincushion disto
 - Focal Length: 3.15mm
 
 ### Maths:
-<img src="images/1.png" width="300" height="200">
-<img src="images/1.png" width="300" height="200">
-<img src="images/1.png" width="300" height="200">
-<img src="images/1.png" width="300" height="200">
 
 ![Qian!](/images/1.png "bla")
 
