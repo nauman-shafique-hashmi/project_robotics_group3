@@ -1,5 +1,7 @@
-# Turtlebot3 and Niryo Ned2 Working together
-#### Group3: Nauman Shafique HASHMI, Atanda Abdullahi Adewale and Qian Zhiling
+# ROSBot Harmony 1.0
+- Turtlebot3 and Niryo-Ned2 Working together
+
+#### ViBOT_2023/Group3: Nauman Shafique HASHMI, Atanda Abdullahi Adewale and Qian Zhiling
 
 ## Intro/Project Abstract:
 
