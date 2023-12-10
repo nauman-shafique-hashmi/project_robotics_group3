@@ -81,11 +81,11 @@ And tangential distortion:
     </figure>
     <figure>
         <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
-        <figcaption>Before Calibration</figcaption>
+        <figcaption>camera perspective</figcaption>
     </figure>
      <figure>
         <img src="images/after_extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
-        <figcaption>After Calibration</figcaption>
+        <figcaption>Bird eye view</figcaption>
     </figure>
     
 </div>
