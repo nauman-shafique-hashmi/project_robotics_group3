@@ -72,18 +72,16 @@ And tangential distortion:
 
 <div style="display: flex; justify-content: center;">
     <figure style="margin-right: 20px;">
-        <img src="images/before_intrinsic_calibration.png" alt="Image 1" style="width: 300px; height: auto;" /><br/>
+        <img src="images/before_intrinsic_calibration.png" alt="Image 1" style="width: 300px; height: auto;" />
         <figcaption>Before Calibration</figcaption>
     </figure>
     <figure>
-        <img src="images/after_intrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" /><br/>
+        <img src="images/after_intrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
         <figcaption>After Calibration</figcaption>
     </figure>
 </div>
 
-```sh
-This picture taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
-```
+##### This picture taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
 
 ## Required Libraries and Packages to Start
       ros-noetic-image-transport 
