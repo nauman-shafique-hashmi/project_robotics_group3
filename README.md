@@ -487,5 +487,13 @@ Final lane detection on
   <img src="images/tb_moving.gif"/>
 </p>
 
+
+<h1><b>PART</b>b</h1>
+## The Communication:
+
+This part demonstrates the interaction between two robots: Turtlebot3 and Niryo Ned2. The Turtlebot3 sends a message to the Niryo Ned2 robot indicating that it has stopped. The Niryo Ned2 robot then proceeds to perform a vision pick, place the object, and return to the initial pose. TB3 resumes self driving.
+The communication between the two robots is facilitated through a ROS topic called "channel_turtle_niryo".
+
+
 [1]:https://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#autonomous-driving
 [2]: https://automaticaddison.com/the-ultimate-guide-to-real-time-lane-detection-using-opencv/
