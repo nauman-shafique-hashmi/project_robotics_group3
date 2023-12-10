@@ -519,7 +519,7 @@ A custom ROS message type used for communication between TurtleBot3 and Niryo Ne
     bool finished
 </pre>
 
-dont forget to build the pacakge i.e <pre>catkin build </pre> in the workspace directory  
+dont forget to build the pacakge in the workspace directory i.e <pre>catkin build </pre>  
 
 use <pre>rosrun robot_com ned2<pre>
 
