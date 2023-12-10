@@ -68,6 +68,20 @@ And tangential distortion:
 
 ![Qian!](/images/14.png "bla")
 
+### Callibration Result:
+
+<div style="display: flex; justify-content: center;">
+    <figure style="margin-right: 20px;">
+        <img src="images/before_intrinsic_calibration" alt="Image 1" style="width: 300px; height: auto;" />
+        <figcaption>Before Calibration</figcaption>
+    </figure>
+    <figure>
+        <img src="images/after_intrinsic_calibration" alt="Image 2" style="width: 300px; height: auto;" />
+        <figcaption>After Calibration</figcaption>
+    </figure>
+</div>
+
+
 
 ## Required Libraries and Packages to Start
       ros-noetic-image-transport 
@@ -122,7 +136,7 @@ One of the multiple pictures taken during calibration proccess is listed below.
 
 ![Calibartion](images/left-0033.png)
 
-After completing the callibration we saved the data. By default calibrationdata.tar.gz is created at /tmp folder on remote pc. This compressed folder contain the sample images as well as the callibration data in a file named ost.yaml. For using the Autorace Camera package we copied the calibration file data and pasted into the file present in the Autorace Race package named [camerav2_320x240_30fps.yaml](/calibration/intrinsic_calibration/camerav2_320x240_30fps.yaml) 
+After completing the calslibration we saved the data. By default calibrationdata.tar.gz is created at /tmp folder on remote pc. This compressed folder contain the sample images as well as the callibration data in a file named ost.yaml. For using the Autorace Camera package we copied the calibration file data and pasted into the file present in the Autorace Race package named [camerav2_320x240_30fps.yaml](/calibration/intrinsic_calibration/camerav2_320x240_30fps.yaml) 
 
 ### Extrinsic Camera Callibration
 
@@ -138,6 +152,7 @@ Now to set the region of interest and the warping parameters for projected image
       rosrun rqt_reconfigure rqt_reconfigure
 
 After the extrinsic callibration the results are stored in  turtlebot3_autorace_camera/calibration/extrinsic_calibration/ having two files compensation.yaml and projection.yaml. We copied those files to our package so we can use them to republish the topic coming from raspberry pi after applying the desired projection and compensation. These file are located at [Extrinsic Calibration Files](/calibration/extrinsic_calibration)
+
 
 ## ROS Package
 Overall structure of the ros packge is shown below.
