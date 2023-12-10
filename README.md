@@ -32,29 +32,33 @@ We set the world coordinate on the check board, so here R1 R2 means the first an
 Step 3 solve intrinsic matrix:
 
 ![Qian!](/images/5.png "bla")
+
 Consider
+
 ![Qian!](/images/6.png "bla")
 
 ![Qian!](/images/7.png "bla")
 
 Notate A as :
+
 ![Qian!](/images/8.png "bla")
 
 ![Qian!](/images/9.png "bla")
 
+So we have: 
+
 ![Qian!](/images/10.png "bla")
 
-So we have: 
-![Qian!](/images/11.png "bla")
-
 To solve out B, according to:
-![Qian!](/images/12.png "bla")
+
+![Qian!](/images/11.png "bla")
 
 With at least 3 photos,we can solve the intrinsic parameters.
 
 ### Extrinsic Calibration
 solve extrinsic matrix through
-![Qian!](/images/13.png "bla")
+
+![Qian!](/images/12.png "bla")
 
 Finally, we need to mention that the automatic calibration tools considered Tackle radial distortion:
 
