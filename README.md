@@ -15,20 +15,32 @@ Barrel distortion causes parallel lines to curve outward, while Pincushion disto
 - Focal Length: 3.15mm
 
 ### Maths:
-
+We used the large checkerboard for Intrinsic Camera Calibration
+-Principles of Camera Imaging: 
 ![Qian!](/images/1.png "bla")
+|Step 1: OpenCV did Harris corner detection first
+|Step 2: Solve the product of the intrinsic and extrinsic matrices:
 ![Qian!](/images/2.png "bla")
-![Qian!](/images/3.png "bla")
+The product is a homography matrix
+![Qian!](/images/3.png "homography matrix")
+We set the world coordinate on the check board, so here R1 R2 means the first and second column of the matrix.
 ![Qian!](/images/4.png "bla")
 ![Qian!](/images/5.png "bla")
+Step 3 solve intrinsic matrix:
 ![Qian!](/images/6.png "bla")
 ![Qian!](/images/7.png "bla")
 ![Qian!](/images/8.png "bla")
 ![Qian!](/images/9.png "bla")
 ![Qian!](/images/10.png "bla")
+So we have: 
 ![Qian!](/images/11.png "bla")
+To solve out B, according to:
 ![Qian!](/images/12.png "bla")
-
+With at least 3 photos,we can solve the intrinsic parameters.
+![Qian!](/images/13.png "bla")
+![Qian!](/images/13.png "bla")
+### Extrinsic Calibration
+solve extrinsic matrix:
 
 ## Required Libraries and Packages to Start
       ros-noetic-image-transport 
