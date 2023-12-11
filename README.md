@@ -422,6 +422,7 @@ Because we used newest version of opencv, so we cannot directly use package to g
  <p>
   In niryo node 
  </p>
+ 
         self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size = 1)
         self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
 
