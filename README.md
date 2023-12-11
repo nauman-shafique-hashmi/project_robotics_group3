@@ -530,10 +530,10 @@ To Run the code we need to do following steps on remote PC and Turtlebot.
  **Previous Trial Video.
  
  <p float="middle">
- <img src="images/trial.gif"/>
+ <img src="images/tb_movingS.gif"/>
  </p>
  
- **Complete Run Video.
+ **ArUco Market detection.
  
  <p float="middle">
  <img src="images/complete.gif"/>
