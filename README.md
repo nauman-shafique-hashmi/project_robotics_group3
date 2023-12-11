@@ -136,10 +136,11 @@ Algorithm Steps
 <p>Autorace package detect the lanes (yellow and white) using thresholding. The thresholding is performed based on the low and high HSL values of both the lanes. Every pixel value below the lower threshold replaced with  ‘0’ black pixel and very pixel value above the thresholding is turned to ‘1’ white pixel, thus resulting in a binary image. Now that we have binary images for both the lanes, the next step is creating a masks of those lanes which serve as ROI for further processing.
 After having the masked values, bitwise AND operations is performed between the original HSL image and masked images, this will result in filtering out each colored lane.
 </p>
+
+
  def maskWhiteLane(self, image):
         # Convert BGR to HSV
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
         Hue_l = self.hue_white_l
         Hue_h = self.hue_white_h
         Saturation_l = self.saturation_white_l
@@ -198,10 +199,12 @@ After having the masked values, bitwise AND operations is performed between the 
         return fraction_num, mask
         
 <p>
+    
 The next step is marking those filtered lanes. AutoRace does this using two methods:
 - Fitting a second order polynomial line in the detected lanes using the existing coefficient of the lane
 - using sliding window method. 
 </p>
+
     def fit_from_lines(self, lane_fit, image):
         nonzero = image.nonzero()
         nonzeroy = np.array(nonzero[0])
