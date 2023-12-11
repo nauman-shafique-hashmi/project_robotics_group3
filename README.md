@@ -28,10 +28,9 @@ Barrel distortion causes parallel lines to curve outward, while Pincushion disto
 - FOV: 160 degrees Diagonally
 - Focal Length: 3.15mm
 
-### Maths:
-We used the large checkerboard for Intrinsic Camera Calibration
-
--Principles of Camera Imaging: 
+## Maths:
+ Apart from using AutoRace package that ease the way for us doing Camera Calibration, The concepts of Linear algebra played an important role understanding the calibration.
+- Principles of Camera Imaging: 
 ![Qian!](/images/1.png "bla")
 Step 1: OpenCV did Harris corner detection first
 
@@ -67,22 +66,7 @@ To solve out B, according to:
 
 ![Qian!](/images/11.png "bla")
 
-With at least 3 photos,we can solve the intrinsic parameters.
-
-### Extrinsic Calibration
-solve extrinsic matrix through
-
-![Qian!](/images/12.png "bla")
-
-Finally, we need to mention that the automatic calibration tools considered Tackle radial distortion:
-
-![Qian!](/images/13.png "bla")
-
-And tangential distortion:
-
-![Qian!](/images/14.png "bla")
-
-### Callibration Results:
+## Intrinsic Callibration Results:
 
 <div style="display: flex; justify-content: center;">
     <figure style="margin-right: 20px;">
@@ -92,7 +76,28 @@ And tangential distortion:
     <figure>
         <img src="images/after_intrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
         <figcaption>After Calibration</figcaption>
-    </figure>
+    </figure>  
+</div>
+
+> This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture</p>
+
+
+## Extrinsic Calibration
+solve extrinsic matrix through
+
+![Qian!](/images/12.png "bla")
+
+Finally, we need to mention that the automatic calibration tools considered tackling radial distortion:
+
+![Qian!](/images/13.png "bla")
+
+And tangential distortion:
+
+![Qian!](/images/14.png "bla")
+
+## Extrinsic Callibration Results:
+
+<div style="display: flex; justify-content: center;">
     <figure>
         <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
         <figcaption>camera perspective</figcaption>
@@ -103,8 +108,6 @@ And tangential distortion:
     </figure>
     
 </div>
-
-<p>This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture</p>
 
 # Part 2:
 
