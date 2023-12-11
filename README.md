@@ -424,28 +424,6 @@ The official control line code used a pd controller to follow the lines. Firstly
  </p>
  
          self.image_sub = rospy.Subscriber('/camera/image/compressed', CompressedImage, self.image_callback)
-<pre>
- def cbFollowLane(self, desired_center):
-         if not self.stopped:
-             self.ids = None
-             center = desired_center.data
- 
-             error = center - 500
- 
-             Kp = 0.0025
-             Kd = 0.007
- 
-             angular_z = Kp * error + Kd * (error - self.lastError)
-             self.lastError = error
- 
-             self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
-             self.twist.linear.y = 0
-             self.twist.linear.z = 0
-             self.twist.angular.x = 0
-             self.twist.angular.y = 0
-             self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
-             self.pub_cmd_vel.publish(self.twist)
-</pre>
 
 ## Aruco Marker Detection
 <p>
