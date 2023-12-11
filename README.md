@@ -321,32 +321,33 @@ The next step is marking those filtered lanes. AutoRace does this using two meth
 The official control line code used a pd controller to follow the lines. Firstly, the callback function below listen to the topic '/control/lane'. The topic will provide summation of all the x coordinates of the detected line points , which is called “desired_center” in code below. Then the following code will calculate the error between the “desired_center” and the current image center 500.Then use this error to do the pd control. 
 </p>
 
-def cbFollowLane(self, desired_center):
-        if not self.stopped:
-            self.ids = None
-            center = desired_center.data
-
-            error = center - 500
-
-            Kp = 0.0025
-            Kd = 0.007
-
-            angular_z = Kp * error + Kd * (error - self.lastError)
-            self.lastError = error
-
-            self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
-            self.twist.linear.y = 0
-            self.twist.linear.z = 0
-            self.twist.angular.x = 0
-            self.twist.angular.y = 0
-            self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
-            self.pub_cmd_vel.publish(self.twist)
+     def cbFollowLane(self, desired_center):
+             if not self.stopped:
+                 self.ids = None
+                 center = desired_center.data
+     
+                 error = center - 500
+     
+                 Kp = 0.0025
+                 Kd = 0.007
+     
+                 angular_z = Kp * error + Kd * (error - self.lastError)
+                 self.lastError = error
+     
+                 self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+                 self.twist.linear.y = 0
+                 self.twist.linear.z = 0
+                 self.twist.angular.x = 0
+                 self.twist.angular.y = 0
+                 self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+                 self.pub_cmd_vel.publish(self.twist)
+                 
 
  <p>
   We redesigned the control line node in autorace package. We added a subscriber to get compressed image from topic '/camera/image/compressed' ：
  </p>
  
-  self.image_sub = rospy.Subscriber('/camera/image/compressed', CompressedImage, self.image_callback)
+         self.image_sub = rospy.Subscriber('/camera/image/compressed', CompressedImage, self.image_callback)
 
 ## Aruco Marker Detection
 <p>
@@ -386,20 +387,14 @@ def cbFollowLane(self, desired_center):
    ## Distance calculation from the ArUco Detection
    
 <p>
+ 
 Because we used newest version of opencv, so we cannot directly use package to get the aruco to camera translation. So we defined our own function. It solved a pnp problem .we set the world coordinate in the middle of aruco, that’s why all the real world marker_points has 0 z coordinates. We took the “Infinitesimal Plane-Based Pose Estimation” method to solve the problem.
+
 </p>
 
 
  def my_estimatePoseSingleMarkers(self, corners, marker_size, mtx, distortion):
-        '''
-        This will estimate the rvec and tvec for each of the marker corners detected by:
-        corners, ids, rejectedImgPoints = detector.detectMarkers(image)
-        corners - is an array of detected corners for each detected marker in the image
-        marker_size - is the size of the detected markers
-        mtx - is the camera matrix
-        distortion - is the camera distortion matrix
-        RETURN list of rvecs, tvecs, and trash (so that it corresponds to the old estimatePoseSingleMarkers())
-        '''
+      
         marker_points = np.array([[-marker_size / 2, marker_size / 2, 0],
                                 [marker_size / 2, marker_size / 2, 0],
                                 [marker_size / 2, -marker_size / 2, 0],
@@ -421,9 +416,9 @@ Because we used newest version of opencv, so we cannot directly use package to g
 </p> 
 
 
- self.sub_turtle = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.turtleCallBack, queue_size = 1)
- self.pub_turtle = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=1)
- self.msg_turtle_ned = Connectniryo()
+   self.sub_turtle = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.turtleCallBack, queue_size = 1)
+   self.pub_turtle = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=1)
+   self.msg_turtle_ned = Connectniryo()
 
  <p  In niryo node:</p>
 
