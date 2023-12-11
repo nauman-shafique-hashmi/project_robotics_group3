@@ -107,11 +107,20 @@ And tangential distortion:
 ##### This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
 
 ### Lane Detection and Lane Following using AutoRace:
-Once the calibraiton process is done, we are good to go for lane detection. The steps involve in the process are as follows
-Creating an optimal lighting environment is pivotal for effective lane detection in TurtleBot3 operations. Variations in luminance across the track present a significant challenge, with certain sections experiencing excessive light resulting in glare, while others remain comparatively darker. This discrepancy necessitates individualized HSL parameter configurations rather than a universal setting in the robotics lab for every lighting condition. Extensive trials involving diverse light combinations were conducted in an attempt to balance the illumination across all track sections, yet none proved successful. However, barring the use of dual projection lights. These lights provided the flexibility to adjust orientation and intensity, enabling uniform illumination of the entire track. Tuning the camera parameters. We operated on 5600k temperature with 100% intensity value
-HSL parameters setting.
-AutroRace Package convert RGB images received from TurtleBot3 in HSL color scheme. And it has very practical reason for that. In HSL each color has three attributes, Hue, Saturation and the lightness, which make it very convenient to tweak a specific aspect of the color to achieve any desired shade, which in case of RGB is very inconvenient though not impossible.
+<p>
+Once the calibraiton process is done, we are good to go for lane detection. At this point, creating an optimal lighting environment is pivotal for effective lane detection in TurtleBot3 operations. Because variations in luminance across the track present a significant challenge, with certain sections experiencing excessive light resulting in glare, while others remain comparatively darker. 
+</p>
+<p>
+This discrepancy necessitates individualized HSL parameter configurations rather than a universal setting in the robotics lab for every lighting condition. Extensive trials involving diverse light combinations were conducted in an attempt to balance the illumination across all track sections, yet none proved successful. However, barring the use of dual projection lights. These lights provided the flexibility to adjust orientation and intensity, enabling uniform illumination overthe entire track.
+For tuning the camera parameters We operated on 5600k temperature with 100% intensity value.
+</p>
 
+<p>
+<b></b>HSL parameters setting <b/>
+AutroRace Package convert RGB images received from TurtleBot3 in HSL color scheme. And it has very practical reason for that. In HSL each color has three attributes, Hue, Saturation and the lightness, which make it very convenient to tweak a specific aspect of the color to achieve any desired shade, which in case of RGB is very inconvenient though not impossible.
+</p>
+    
+<p>
 Lane Detection Algorithm:
 Autorace package detect the lanes (yellow and white) using thresholding. The thresholding is performed based on the low and high HSL values of both the lines. Every pixel value below the lower threshold replaced with intensity value of ‘0’ black and very pixel  pixel value above the thresholding is turned to ‘1’ white pixel, thus resulting in a binary image.
 Now that we have binary images for both the lanes, the next step is creating a masks of those lanes which serve as ROI for further processing.
@@ -119,6 +128,9 @@ After having the masked values, bitwise AND operations is performed between the 
 The next step is marking those filtered lanes. AutoRace does this using two methods:
 - Fitting a second order polynomial line in the detected lanes using the existing coefficient of the lane
 -Or using sliding window method. 
+</p>
+
+
 
 
 
