@@ -103,12 +103,25 @@ And tangential distortion:
 
 <!DOCTYPE html>
 <html>
+  <head>
+    <style>
+      .image-container {
+        display: flex;
+      }
+      .image-container img {
+        margin-right: 10px; /* Adjust spacing between images */
+        width: 300px; /* Adjust image width as needed */
+        height: 200px; /* Adjust image height as needed */
+      }
+    </style>
+  </head>
   <body>
-    <img src="images/extrinsic_calibration.png" alt="Description of Image 1" style="width:300px;height:200px;">
-    <img src="images/extrinsic_calibration.png" alt="Description of Image 2" style="width:300px;height:200px;">
+    <div class="image-container">
+      <img src="images/after_extrinsic_calibration.png" alt="Description of Image 1">
+      <img src="images/after_extrinsic_calibration.png" alt="Description of Image 2">
+    </div>
   </body>
 </html>
-
 
 # Part 2:
 
