@@ -99,12 +99,10 @@ And tangential distortion:
 
 <div style="display: flex; justify-content: center;">
     <figure>
-        <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: 300px;" />
-    
+        <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
     </figure>
-     <figure>
-        <img src="images/after_extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
- 
+    <figure>
+        <img src="images/after_extrinsic_calibration.png" alt="Image 3" style="width: 300px; height: auto;" />
     </figure>
     
 </div>
