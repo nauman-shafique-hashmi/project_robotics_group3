@@ -612,6 +612,11 @@ To Run the code we need to do following steps on remote PC and Turtlebot.
  <p float="middle">
  <img src="/images/ArUco_detection.gif"/>
  </p>
+
+ **Niryo Failed Attempt to Work 
+  <p float="middle">
+ <img src="/images/ned2_working.gif"/>
+ </p>
  
  [1]:https://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#autonomous-driving
  [2]: https://automaticaddison.com/the-ultimate-guide-to-real-time-lane-detection-using-opencv/
