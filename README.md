@@ -433,6 +433,36 @@ Because we used newest version of opencv, so we cannot directly use package to g
 When turtlebot detect the aruco, it will use publisher pub_turtle to publish “detected = True,  finished = False” , when niryo finishing picking, it will use publisher pub_niryo to publish “detected = False, finished =True”.
 </p>
 
+<h1><b>PART 4</b></h1>
+## Communication
+
+This part demonstrates the interaction between two robots: Turtlebot3 and Niryo Ned2. The Turtlebot3 sends a message to the Niryo Ned2 robot indicating that it has stopped. The Niryo Ned2 robot then proceeds to perform a vision pick, place the object, and return to the initial pose. TB3 resumes self driving.
+The communication between the two robots is facilitated through a ROS topic called "channel_turtle_niryo".
+
+Network Config:
+on Ubuntu, edit <b>/etc/network/interfaces </b>
+Set the IPv4 Address to 192.168.0.100 on PC, 192.168.0.200 on TB3 and 192.168.0.150 on Niryo Ned2
+
+Then set network group:
+<pre>
+    export ROS_MASTER_URI=http://192.168.0.100:11311
+    export ROS_IP=192.168.0.100
+</pre>
+on Pc, repeat on TB3 and Niryo, set their IP respectively. ping the PC or telnet 192.168.0.100 11311 from each robot toconfirm connection.   
+
+Create a packeage <b>robot_com</b> with a node <b>ned2.py</b>, make executable with <pre> chmod +x ned2.py </pre>
+make a msg dir, for custom message below   
+
+Connectniryo.msg:
+A custom ROS message type used for communication between TurtleBot3 and Niryo Ned2.
+<pre>
+    bool detected
+    bool finished
+</pre>
+
+dont forget to build the pacakge in the workspace directory i.e <pre>catkin build </pre>  
+
+use <pre>rosrun robot_com ned2<pre>
 
 # To Run this code
 
@@ -494,37 +524,6 @@ Final lane detection on
   <img src="images/tb_moving.gif"/>
 </p>
 
-
-<h1><b>PART 3</b></h1>
-## Communication
-
-This part demonstrates the interaction between two robots: Turtlebot3 and Niryo Ned2. The Turtlebot3 sends a message to the Niryo Ned2 robot indicating that it has stopped. The Niryo Ned2 robot then proceeds to perform a vision pick, place the object, and return to the initial pose. TB3 resumes self driving.
-The communication between the two robots is facilitated through a ROS topic called "channel_turtle_niryo".
-
-Network Config:
-on Ubuntu, edit <b>/etc/network/interfaces </b>
-Set the IPv4 Address to 192.168.0.100 on PC, 192.168.0.200 on TB3 and 192.168.0.150 on Niryo Ned2
-
-Then set network group:
-<pre>
-    export ROS_MASTER_URI=http://192.168.0.100:11311
-    export ROS_IP=192.168.0.100
-</pre>
-on Pc, repeat on TB3 and Niryo, set their IP respectively. ping the PC or telnet 192.168.0.100 11311 from each robot toconfirm connection.   
-
-Create a packeage <b>robot_com</b> with a node <b>ned2.py</b>, make executable with <pre> chmod +x ned2.py </pre>
-make a msg dir, for custom message below   
-
-Connectniryo.msg:
-A custom ROS message type used for communication between TurtleBot3 and Niryo Ned2.
-<pre>
-    bool detected
-    bool finished
-</pre>
-
-dont forget to build the pacakge in the workspace directory i.e <pre>catkin build </pre>  
-
-use <pre>rosrun robot_com ned2<pre>
 
 
 [1]:https://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#autonomous-driving
