@@ -139,7 +139,7 @@ After having the masked values, bitwise AND operations is performed between the 
 </p>
 
 
- def maskWhiteLane(self, image):
+     def maskWhiteLane(self, image):
         # Convert BGR to HSV
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         Hue_l = self.hue_white_l
