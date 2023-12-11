@@ -141,7 +141,26 @@ Algorithm Steps
 
 - <b>Algorithm Steps</b>
 <p>
-Autorace package detect the lanes (yellow and white) using thresholding. The thresholding is performed based on the low and high HSL values of both the lanes. Every pixel value below the lower threshold replaced with  ‘0’ black pixel and very pixel value above the thresholding is turned to ‘1’ white pixel, thus resulting in a binary image. Now that we have binary images for both the lanes, the next step is creating a masks of those lanes which serve as ROI for further processing.
+Autorace package detect the lanes (yellow and white) using thresholding. The thresholding is performdef cbFollowLane(self, desired_center):
+         if not self.stopped:
+             self.ids = None
+             center = desired_center.data
+ 
+             error = center - 500
+ 
+             Kp = 0.0025
+             Kd = 0.007
+ 
+             angular_z = Kp * error + Kd * (error - self.lastError)
+             self.lastError = error
+ 
+             self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+             self.twist.linear.y = 0
+             self.twist.linear.z = 0
+             self.twist.angular.x = 0
+             self.twist.angular.y = 0
+             self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+             self.pub_cmd_vel.publish(self.twist)ed based on the low and high HSL values of both the lanes. Every pixel value below the lower threshold replaced with  ‘0’ black pixel and very pixel value above the thresholding is turned to ‘1’ white pixel, thus resulting in a binary image. Now that we have binary images for both the lanes, the next step is creating a masks of those lanes which serve as ROI for further processing.
 After having the masked values, bitwise AND operations is performed between the original HSL image and masked images, this will result in filtering out each colored lane.
 </p>
 
@@ -296,7 +315,26 @@ The next step is marking those filtered lanes. AutoRace does this using two meth
 
         # Concatenate the arrays of indices
         lane_inds = np.concatenate(lane_inds)
-
+def cbFollowLane(self, desired_center):
+         if not self.stopped:
+             self.ids = None
+             center = desired_center.data
+ 
+             error = center - 500
+ 
+             Kp = 0.0025
+             Kd = 0.007
+ 
+             angular_z = Kp * error + Kd * (error - self.lastError)
+             self.lastError = error
+ 
+             self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+             self.twist.linear.y = 0
+             self.twist.linear.z = 0
+             self.twist.angular.x = 0
+             self.twist.angular.y = 0
+             self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+             self.pub_cmd_vel.publish(self.twist)
         # Extract line pixel positions
         x = nonzerox[lane_inds]
         y = nonzeroy[lane_inds]
@@ -307,7 +345,26 @@ The next step is marking those filtered lanes. AutoRace does this using two meth
             self.lane_fit_bef = lane_fit
         except:
             lane_fit = self.lane_fit_bef
-
+def cbFollowLane(self, desired_center):
+         if not self.stopped:
+             self.ids = None
+             center = desired_center.data
+ 
+             error = center - 500
+ 
+             Kp = 0.0025
+             Kd = 0.007
+ 
+             angular_z = Kp * error + Kd * (error - self.lastError)
+             self.lastError = error
+ 
+             self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+             self.twist.linear.y = 0
+             self.twist.linear.z = 0
+             self.twist.angular.x = 0
+             self.twist.angular.y = 0
+             self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+             self.pub_cmd_vel.publish(self.twist)
         # Generate x and y values for plotting
         ploty = np.linspace(0, img_w.shape[0] - 1, img_w.shape[0])
         lane_fitx = lane_fit[0] * ploty ** 2 + lane_fit[1] * ploty + lane_fit[2]
@@ -318,7 +375,26 @@ The next step is marking those filtered lanes. AutoRace does this using two meth
 ## Lane Following 
 
 <p>
-The official control line code used a pd controller to follow the lines. Firstly, the callback function below listen to the topic '/control/lane'. The topic will provide summation of all the x coordinates of the detected line points , which is called “desired_center” in code below. Then the following code will calculate the error between the “desired_center” and the current image center 500.Then use this error to do the pd control. 
+The official control line code used a pd controller to follow the lines. Firstly, the callback function below listen to the topic '/control/lane'. The topic will provide summation of all the x coordinates of the detected line points , which is called “desired_center” in code below. Then the following code will calculate the error between tdef cbFollowLane(self, desired_center):
+         if not self.stopped:
+             self.ids = None
+             center = desired_center.data
+ 
+             error = center - 500
+ 
+             Kp = 0.0025
+             Kd = 0.007
+ 
+             angular_z = Kp * error + Kd * (error - self.lastError)
+             self.lastError = error
+ 
+             self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+             self.twist.linear.y = 0
+             self.twist.linear.z = 0
+             self.twist.angular.x = 0
+             self.twist.angular.y = 0
+             self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+             self.pub_cmd_vel.publish(self.twist)he “desired_center” and the current image center 500.Then use this error to do the pd control. 
 </p>
 
      def cbFollowLane(self, desired_center):
@@ -348,6 +424,28 @@ The official control line code used a pd controller to follow the lines. Firstly
  </p>
  
          self.image_sub = rospy.Subscriber('/camera/image/compressed', CompressedImage, self.image_callback)
+<pre>
+ def cbFollowLane(self, desired_center):
+         if not self.stopped:
+             self.ids = None
+             center = desired_center.data
+ 
+             error = center - 500
+ 
+             Kp = 0.0025
+             Kd = 0.007
+ 
+             angular_z = Kp * error + Kd * (error - self.lastError)
+             self.lastError = error
+ 
+             self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+             self.twist.linear.y = 0
+             self.twist.linear.z = 0
+             self.twist.angular.x = 0
+             self.twist.angular.y = 0
+             self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+             self.pub_cmd_vel.publish(self.twist)
+</pre>
 
 ## Aruco Marker Detection
 <p>
