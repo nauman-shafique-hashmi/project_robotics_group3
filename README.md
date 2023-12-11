@@ -101,27 +101,18 @@ And tangential distortion:
 ![Qian!](/images/extrinsic_calibration.png "bla")
 ![Qian!](/images/after_extrinsic_calibration.png "bla")
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <style>
-      .image-container {
-        display: flex;
-      }
-      .image-container img {
-        margin-right: 10px; /* Adjust spacing between images */
-        width: 300px; /* Adjust image width as needed */
-        height: 200px; /* Adjust image height as needed */
-      }
-    </style>
-  </head>
-  <body>
-    <div class="image-container">
-      <img src="images/after_extrinsic_calibration.png" alt="Description of Image 1">
-      <img src="images/after_extrinsic_calibration.png" alt="Description of Image 2">
-    </div>
-  </body>
-</html>
+<div style="display: flex; justify-content: center;">
+    <figure style="margin-right: 20px;">
+        <img src="/images/extrinsic_calibration.png " alt="Image 1" style="width: 300px; height: auto;" />
+        <figcaption>Camera Perspective </figcaption>
+    </figure>
+    <figure>
+        <img src="/images/after_extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
+        <figcaption>Bird's eye view</figcaption>
+    </figure>  
+</div>
+
+
 
 # Part 2:
 
