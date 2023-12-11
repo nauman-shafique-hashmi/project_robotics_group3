@@ -411,7 +411,7 @@ Because we used newest version of opencv, so we cannot directly use package to g
 
  ## Communication between niryo and turtlebot :
 
-<p>We defined a pair of subscriber and publisher in both the turtlebot node and niryo node for communication.
+<p> We defined a pair of subscriber and publisher in both the turtlebot node and niryo node for communication.
 - In turtlebot node:
 </p> 
 
@@ -420,7 +420,7 @@ Because we used newest version of opencv, so we cannot directly use package to g
    self.pub_turtle = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=1)
    self.msg_turtle_ned = Connectniryo()
 
- <p  In niryo node:</p>
+ <p>In niryo node:</p>
 
  self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size = 1)
  self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
@@ -429,9 +429,7 @@ Because we used newest version of opencv, so we cannot directly use package to g
 ## Our custom message:
 
 <p>
- 
 When turtlebot detect the aruco, it will use publisher pub_turtle to publish “detected = True,  finished = False” , when niryo finishing picking, it will use publisher pub_niryo to publish “detected = False, finished =True”.
-
 </p>
 
 
