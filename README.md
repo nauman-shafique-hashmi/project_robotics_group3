@@ -101,6 +101,15 @@ And tangential distortion:
 ![Qian!](/images/extrinsic_calibration.png "bla")
 ![Qian!](/images/after_extrinsic_calibration.png "bla")
 
+<!DOCTYPE html>
+<html>
+  <body>
+    <img src="images/extrinsic_calibration.png" alt="Description of Image 1" style="width:300px;height:200px;">
+    <img src="images/extrinsic_calibration.png" alt="Description of Image 2" style="width:300px;height:200px;">
+  </body>
+</html>
+
+
 # Part 2:
 
 ## Lane Detection 
