@@ -99,7 +99,7 @@ And tangential distortion:
 
 <div style="display: flex; justify-content: center;">
     <figure>
-        <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
+        <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: 400px;" />
         <figcaption>camera perspective</figcaption>
     </figure>
      <figure>
@@ -111,7 +111,7 @@ And tangential distortion:
 
 # Part 2:
 
-### Lane Detection 
+## Lane Detection 
 <p>
 Once the calibraiton process is done, we are good to go for lane detection. At this point, creating an optimal lighting environment is pivotal for effective lane detection in TurtleBot3 operations. Because variations in luminance across the track present a significant challenge, with certain sections experiencing excessive light resulting in glare, while others remain comparatively darker. 
 </p>
