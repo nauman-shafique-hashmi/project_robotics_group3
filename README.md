@@ -389,6 +389,7 @@ def cbFollowLane(self, desired_center):
 Because we used newest version of opencv, so we cannot directly use package to get the aruco to camera translation. So we defined our own function. It solved a pnp problem .we set the world coordinate in the middle of aruco, that’s why all the real world marker_points has 0 z coordinates. We took the “Infinitesimal Plane-Based Pose Estimation” method to solve the problem.
 </p>
 
+
  def my_estimatePoseSingleMarkers(self, corners, marker_size, mtx, distortion):
         '''
         This will estimate the rvec and tvec for each of the marker corners detected by:
@@ -419,18 +420,24 @@ Because we used newest version of opencv, so we cannot directly use package to g
 - In turtlebot node:
 </p> 
 
+
  self.sub_turtle = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.turtleCallBack, queue_size = 1)
  self.pub_turtle = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=1)
  self.msg_turtle_ned = Connectniryo()
- 
- - In niryo node:
+
+ <p  In niryo node:</p>
 
  self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size = 1)
  self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
  
+ 
 ## Our custom message:
 
-<p>When turtlebot detect the aruco, it will use publisher pub_turtle to publish “detected = True,  finished = False” , when niryo finishing picking, it will use publisher pub_niryo to publish “detected = False, finished =True”. </p>
+<p>
+ 
+When turtlebot detect the aruco, it will use publisher pub_turtle to publish “detected = True,  finished = False” , when niryo finishing picking, it will use publisher pub_niryo to publish “detected = False, finished =True”.
+
+</p>
 
 
 # To Run this code
