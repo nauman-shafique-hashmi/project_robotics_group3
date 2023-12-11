@@ -17,7 +17,7 @@ TurtleBot3 is then tasked with moving until it detects a QR ArUco tag, at which 
 </p>
 <p>
 To enable communication between the PC, acting as the ROS master, and TurtleBot3 as well as Niryo, the ROS_MASTER_URI and ROS_IP parameters on both robots are set to the PC's IP address to form a ROS network group, facilitating the exchange of information through ROS topics
-<p>
+<p> 
 
 # Part 1:
 ## Camera Calibration:
