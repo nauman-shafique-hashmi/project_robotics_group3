@@ -98,16 +98,13 @@ And tangential distortion:
 
 ## Extrinsic Callibration Results:
 
-![Qian!](/images/extrinsic_calibration.png "bla")
-![Qian!](/images/after_extrinsic_calibration.png "bla")
-
 <div style="display: flex; justify-content: center;">
     <figure style="margin-right: 20px;">
-        <img src="/images/extrinsic_calibration.png " alt="Image 1" style="width: 300px; height: auto;" />
+        <img src="/images/extrinsic_calibration.png " alt="Image 1" style="width: 400px; height: auto;" />
         <figcaption>Camera Perspective </figcaption>
     </figure>
     <figure>
-        <img src="/images/after_extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: auto;" />
+        <img src="/images/after_extrinsic_calibration.png" alt="Image 2" style="width: 350px; height: auto;" />
         <figcaption>Bird's eye view</figcaption>
     </figure>  
 </div>
