@@ -463,3 +463,83 @@ A custom ROS message type used for communication between TurtleBot3 and Niryo Ne
 dont forget to build the pacakge in the workspace directory i.e <pre>catkin build </pre>  
 
 use <pre>rosrun robot_com ned2<pre>
+
+# To Run this code
+
+
+To Run the code we need to do following steps on remote PC and Turtlebot.
+
+- Run ros master on PC. 
+
+      roscore
+ 
+- Connecting to Turtlebot3
+
+  Connecting to turtlebot over ssh with password napelturbot
+
+      ssh ubuntu@192.168.0.200
+      
+- Bring Up Turtlebot on SBC.
+
+     roslaunch turtlebot3_bringup turtlebot3_robot.launch
+  
+- In new terminal trigger the camera on SBC
+
+      roslaunch turtlebot3_autorace_camera raspberry_pi_camera_publish.launch
+
+-Run  intrinsic camera calibration launch file on Remote PC
+
+     roslaunch turtlebot3_autorace_camera intrinsic_camera_calibration.launch mode:=action
+
+-Run extrinsic camera calibration launch file on Remote PC
+
+     roslaunch turtlebot3_autorace_camera extrinsic_camera_calibration.launch mode:=action
+
+- Open terminal and Run a lane detection launch file on Remote PC
+  
+     roslaunch turtlebot3_autorace_detect detect_lane.launch mode:=action
+
+ - To be able to communicate with Niryo, also run this commnad
+   rosrun rob_comm Ned2
+
+- Check if the results come out correctly, Open z nds terminal and use the command on remote PC
+  
+     roslaunch turtlebot3_autorace_driving turtlebot3_autorace_control_lane.launch
+
+
+- In another terminal open 
+
+      rqt
+ 
+The results can be viewed on the topics.
+
+      /camera/image/compressed
+      /camera/image_projected/compressed/ 
+Thresholding results on 
+      
+      /camera/mask_lane_detected/compressed
+Final lane detection on 
+
+      /camera/midlane_detected/compressed
+
+     - After using the commands, TurtleBot3 will start to run.
+
+
+
+## Demo and Trial Videos
+
+**Previous Trial Video.
+
+<p float="middle">
+  <img src="images/trial.gif"/>
+</p>
+
+**Complete Run Video.
+
+<p float="middle">
+  <img src="images/complete.gif"/>
+</p>
+
+[1]:https://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#autonomous-driving
+[2]: https://automaticaddison.com/the-ultimate-guide-to-real-time-lane-detection-using-opencv/
+
