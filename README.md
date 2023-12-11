@@ -468,46 +468,35 @@ dont forget to build the pacakge in the workspace directory i.e <pre>catkin buil
 To Run the code we need to do following steps on remote PC and Turtlebot.
  
  - Run ros master on PC. 
- 
-     roscore
+      roscore
  
  - Connecting to Turtlebot3
- 
-     Connecting to turtlebot over ssh with password napelturbot
- 
-     ssh ubuntu@192.168.0.200
+      Connecting to turtlebot over ssh with password napelturbot
+         ssh ubuntu@192.168.0.200
      
  - Bring Up Turtlebot on SBC.
- 
-    roslaunch turtlebot3_bringup turtlebot3_robot.launch
+       roslaunch turtlebot3_bringup turtlebot3_robot.launch
  
  - In new terminal trigger the camera on SBC
- 
       roslaunch turtlebot3_autorace_camera raspberry_pi_camera_publish.launch
  
  -Run  intrinsic camera calibration launch file on Remote PC
- 
       roslaunch turtlebot3_autorace_camera intrinsic_camera_calibration.launch mode:=action
  
  -Run extrinsic camera calibration launch file on Remote PC
- 
       roslaunch turtlebot3_autorace_camera extrinsic_camera_calibration.launch mode:=action
  
  - Open terminal and Run a lane detection launch file on Remote PC
- 
       roslaunch turtlebot3_autorace_detect detect_lane.launch mode:=action
- 
  - To be able to communicate with Niryo, also run this commnad
-
       rosrun rob_com ned2
- 
  - Check if the results come out correctly, Open z nds terminal and use the command on remote PC
  
-    roslaunch turtlebot3_autorace_driving turtlebot3_autorace_control_lane.launch
+      roslaunch turtlebot3_autorace_driving turtlebot3_autorace_control_lane.launch
  
  - In another terminal open 
  
-     rqt
+      rqt
  
  The results can be viewed on the topics.
  
