@@ -351,10 +351,10 @@ The official control line code used a pd controller to follow the lines. Firstly
 
 ## Aruco Marker Detection
 <p>
- When the camera detected the aruco , the turtlebot3 stopped until the it hear the message “finished” from the topic “/channel_turtle_niryo”，
+ When the camera detected the aruco , the turtlebot3 stopped until the it hear the message “finished” from the topic “/channel_turtle_niryo"
 </p>
-  
-  def image_callback(self, msg):
+
+def image_callback(self, msg):
         rospy.loginfo("Seen an image")
         
         try:
@@ -393,7 +393,7 @@ Because we used newest version of opencv, so we cannot directly use package to g
 </p>
 
 
- def my_estimatePoseSingleMarkers(self, corners, marker_size, mtx, distortion):
+     def my_estimatePoseSingleMarkers(self, corners, marker_size, mtx, distortion):
       
         marker_points = np.array([[-marker_size / 2, marker_size / 2, 0],
                                 [marker_size / 2, marker_size / 2, 0],
@@ -411,13 +411,17 @@ Because we used newest version of opencv, so we cannot directly use package to g
 
  ## Communication between niryo and turtlebot :
 
-<p> We defined a pair of subscriber and publisher in both the turtlebot node and niryo node for communication in turtlebot node </p> 
+<p>
+ We defined a pair of subscriber and publisher in both the turtlebot node and niryo node for communication in turtlebot node
+</p> 
 
    self.sub_turtle = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.turtleCallBack, queue_size = 1)
    self.pub_turtle = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=1)
    self.msg_turtle_ned = Connectniryo()
 
- <p> In niryo node </p>
+ <p>
+  In niryo node 
+ </p>
 
  self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size = 1)
  self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
