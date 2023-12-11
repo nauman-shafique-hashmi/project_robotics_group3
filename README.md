@@ -133,7 +133,8 @@ Algorithm Steps
 ![Qian!](/images/detected_lanes.png "bla")
 
 -Algorithm Steps
-<p>Autorace package detect the lanes (yellow and white) using thresholding. The thresholding is performed based on the low and high HSL values of both the lanes. Every pixel value below the lower threshold replaced with  ‘0’ black pixel and very pixel value above the thresholding is turned to ‘1’ white pixel, thus resulting in a binary image. Now that we have binary images for both the lanes, the next step is creating a masks of those lanes which serve as ROI for further processing.
+<p>
+Autorace package detect the lanes (yellow and white) using thresholding. The thresholding is performed based on the low and high HSL values of both the lanes. Every pixel value below the lower threshold replaced with  ‘0’ black pixel and very pixel value above the thresholding is turned to ‘1’ white pixel, thus resulting in a binary image. Now that we have binary images for both the lanes, the next step is creating a masks of those lanes which serve as ROI for further processing.
 After having the masked values, bitwise AND operations is performed between the original HSL image and masked images, this will result in filtering out each colored lane.
 </p>
 
