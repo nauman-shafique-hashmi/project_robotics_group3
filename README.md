@@ -103,8 +103,7 @@ And tangential distortion:
     </figure>
     
 </div>
-
-### This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
+#### This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
 
 <h1><b>PART 2</b></h1>
 
@@ -120,7 +119,7 @@ For tuning the camera parameters We operated on 5600k temperature with 100% inte
 ### Lane Detection Algorithm:
 
 
-**Algorithm Steps
+Algorithm Steps
 
       Thresholding
       Apply Perspective Transformation to Get a Bird’s Eye View
@@ -145,7 +144,7 @@ The next step is marking those filtered lanes. AutoRace does this using two meth
 
 
 ### Lane Detection Results
-![Qian!](/images/lane_param.png "bla")
+![Qian!](/images/detected_lane.png "bla")
 
 
 ### HSL parameters setting
