@@ -384,6 +384,7 @@ def cbFollowLane(self, desired_center):
             self.resume_turtlebot()
 
    ## Distance calculation from the ArUco Detection
+   
 <p>
 Because we used newest version of opencv, so we cannot directly use package to get the aruco to camera translation. So we defined our own function. It solved a pnp problem .we set the world coordinate in the middle of aruco, that’s why all the real world marker_points has 0 z coordinates. We took the “Infinitesimal Plane-Based Pose Estimation” method to solve the problem.
 </p>
@@ -414,19 +415,22 @@ Because we used newest version of opencv, so we cannot directly use package to g
 
  ## Communication between niryo and turtlebot :
 
- 
-We defined a pair of subscriber and publisher in both the turtlebot node and niryo node for communication.
+<p>We defined a pair of subscriber and publisher in both the turtlebot node and niryo node for communication.
 - In turtlebot node:
+</p> 
+
  self.sub_turtle = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.turtleCallBack, queue_size = 1)
  self.pub_turtle = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=1)
  self.msg_turtle_ned = Connectniryo()
-- In niryo node:
+ 
+ - In niryo node:
+
  self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size = 1)
  self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
-## our customed message:
+ 
+## Our custom message:
+
 <p>When turtlebot detect the aruco, it will use publisher pub_turtle to publish “detected = True,  finished = False” , when niryo finishing picking, it will use publisher pub_niryo to publish “detected = False, finished =True”. </p>
-
-
 
 
 # To Run this code
