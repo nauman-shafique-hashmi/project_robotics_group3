@@ -530,13 +530,13 @@ To Run the code we need to do following steps on remote PC and Turtlebot.
  **Previous Trial Video.
  
  <p float="middle">
- <img src="images/tb_movingS.gif"/>
+ <img src="/images/tb_moving.gif"/>
  </p>
  
  **ArUco Market detection.
  
  <p float="middle">
- <img src="images/complete.gif"/>
+ <img src="/images/ArUco_detection.gif"/>
  </p>
  
  [1]:https://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#autonomous-driving
