@@ -79,6 +79,7 @@ To solve out B, according to:
     </figure>  
 </div>
 
+
 > This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture.
 
 
@@ -97,8 +98,8 @@ And tangential distortion:
 
 ## Extrinsic Callibration Results:
 
-![Qian!](/extrinsic_calibration.png "bla")
-![Qian!](/after_extrinsic_calibration.png"bla")
+![Qian!](/images/extrinsic_calibration.png "bla")
+![Qian!](/images/after_extrinsic_calibration.png "bla")
 
 # Part 2:
 
