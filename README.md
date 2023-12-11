@@ -424,21 +424,6 @@ Because we used newest version of opencv, so we cannot directly use package to g
       self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size = 1)
       self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
 
- <p>
-We defined a pair of subscriber and publisher in both the turtlebot node and niryo node for communication in the turtlebot node:
-</p>
-
-```python
-self.sub_turtle = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.turtleCallBack, queue_size=1)
-self.pub_turtle = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=1)
-self.msg_turtle_ned = Connectniryo()
-
-In Niryo Node
-
-self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size=1)
-self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
-
- 
 ## Our custom message:
 
 <p>
