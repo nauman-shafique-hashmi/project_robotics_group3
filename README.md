@@ -98,15 +98,15 @@ And tangential distortion:
 
 ## Extrinsic Callibration Results:
 
-<div style="display: flex; justify-content: center;">
-    <figure style="margin-right: 20px;">
-        <img src="/images/extrinsic_calibration.png " alt="Image 1" style="width: 450px; height: auto;" />
-        <figcaption>Camera Perspective </figcaption>
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <figure style="margin-bottom: 20px;">
+        <img src="/images/extrinsic_calibration.png" alt="Image 1" style="width: 450px; height: auto;" />
+        <figcaption style="text-align: center;">Camera Perspective</figcaption>
     </figure>
     <figure>
         <img src="/images/after_extrinsic_calibration.png" alt="Image 2" style="width: 400px; height: auto;" />
-        <figcaption>Bird's eye view</figcaption>
-    </figure>  
+        <figcaption style="text-align: center;">Bird's eye view</figcaption>
+    </figure>
 </div>
 
 
