@@ -314,6 +314,120 @@ The next step is marking those filtered lanes. AutoRace does this using two meth
 
         return lane_fitx, lane_fit
 
+# Part 3:
+## Lane Following 
+
+<p>
+The official control line code used a pd controller to follow the lines. Firstly, the callback function below listen to the topic '/control/lane'. The topic will provide summation of all the x coordinates of the detected line points , which is called “desired_center” in code below. Then the following code will calculate the error between the “desired_center” and the current image center 500.Then use this error to do the pd control. 
+</p>
+
+def cbFollowLane(self, desired_center):
+        if not self.stopped:
+            self.ids = None
+            center = desired_center.data
+
+            error = center - 500
+
+            Kp = 0.0025
+            Kd = 0.007
+
+            angular_z = Kp * error + Kd * (error - self.lastError)
+            self.lastError = error
+
+            self.twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+            self.twist.linear.y = 0
+            self.twist.linear.z = 0
+            self.twist.angular.x = 0
+            self.twist.angular.y = 0
+            self.twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+            self.pub_cmd_vel.publish(self.twist)
+
+ <p>
+  We redesigned the control line node in autorace package. We added a subscriber to get compressed image from topic '/camera/image/compressed' ：
+ </p>
+ 
+  self.image_sub = rospy.Subscriber('/camera/image/compressed', CompressedImage, self.image_callback)
+
+## Aruco Marker Detection
+<p>
+ When the camera detected the aruco , the turtlebot3 stopped until the it hear the message “finished” from the topic “/channel_turtle_niryo”，
+</p>
+  
+  def image_callback(self, msg):
+        rospy.loginfo("Seen an image")
+        
+        try:
+            np_arr = np.frombuffer(msg.data, np.uint8)
+            cv_image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+            gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
+
+            # Detect ArUco markers if the detector is enabled
+            if self.detector_enabled:
+                parameters = cv2.aruco.DetectorParameters()
+                detector = cv2.aruco.ArucoDetector(self.aruco_dict, parameters)
+                self.corners, self.ids, self.rejectedImgPoints = detector.detectMarkers(gray)
+                #print(self.corners)
+                rvec, tvec, _ = self.my_estimatePoseSingleMarkers(self.corners, self.markerLength, self.camera_matrix, self.dist_coeffs)
+                
+                if self.ids is not None and len(self.ids) > 0 and tvec[0][-1]<=self.distancethreshold:
+                    print('aruco distance is',tvec[0][-1])
+                    rospy.loginfo("ArUco detected!")
+                    self.stop_turtlebot()
+                    self.counter = rospy.Time.now()  # Update the class attribute counter
+                    self.detector_enabled = False  # Disable the detector
+
+        except Exception as e:
+            rospy.logerr(e)
+
+        # Check the counter status and resume if necessary
+        if self.counter is not None and (rospy.Time.now() - self.counter) > self.interval_duration:
+            self.resume_turtlebot()
+
+   ## Distance calculation from the ArUco Detection
+<p>
+Because we used newest version of opencv, so we cannot directly use package to get the aruco to camera translation. So we defined our own function. It solved a pnp problem .we set the world coordinate in the middle of aruco, that’s why all the real world marker_points has 0 z coordinates. We took the “Infinitesimal Plane-Based Pose Estimation” method to solve the problem.
+</p>
+
+ def my_estimatePoseSingleMarkers(self, corners, marker_size, mtx, distortion):
+        '''
+        This will estimate the rvec and tvec for each of the marker corners detected by:
+        corners, ids, rejectedImgPoints = detector.detectMarkers(image)
+        corners - is an array of detected corners for each detected marker in the image
+        marker_size - is the size of the detected markers
+        mtx - is the camera matrix
+        distortion - is the camera distortion matrix
+        RETURN list of rvecs, tvecs, and trash (so that it corresponds to the old estimatePoseSingleMarkers())
+        '''
+        marker_points = np.array([[-marker_size / 2, marker_size / 2, 0],
+                                [marker_size / 2, marker_size / 2, 0],
+                                [marker_size / 2, -marker_size / 2, 0],
+                                [-marker_size / 2, -marker_size / 2, 0]], dtype=np.float32)
+        trash = []
+        rvecs = []
+        tvecs = []
+        for c in corners:
+            nada, R, t = cv2.solvePnP(marker_points, c, mtx, distortion, False, cv2.SOLVEPNP_IPPE_SQUARE)
+            rvecs.append(R)
+            tvecs.append(t)
+            trash.append(nada)
+        return rvecs, tvecs, trash
+
+ ## Communication between niryo and turtlebot :
+
+ 
+We defined a pair of subscriber and publisher in both the turtlebot node and niryo node for communication.
+- In turtlebot node:
+ self.sub_turtle = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.turtleCallBack, queue_size = 1)
+ self.pub_turtle = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=1)
+ self.msg_turtle_ned = Connectniryo()
+- In niryo node:
+ self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size = 1)
+ self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
+## our customed message:
+<p>When turtlebot detect the aruco, it will use publisher pub_turtle to publish “detected = True,  finished = False” , when niryo finishing picking, it will use publisher pub_niryo to publish “detected = False, finished =True”. </p>
+
+
+
 
 # To Run this code
 
