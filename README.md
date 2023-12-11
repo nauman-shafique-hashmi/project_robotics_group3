@@ -104,7 +104,7 @@ And tangential distortion:
         <figcaption style="text-align: center;">Camera Perspective</figcaption>
     </figure>
     <figure>
-        <img src="/images/after_extrinsic_calibration.png" alt="Image 2" style="width: 400px; height: auto;" />
+        <img src="/images/bird_eye_view.png" alt="Image 2" style="width: 400px; height: auto;" />
         <figcaption style="text-align: center;">Bird's eye view</figcaption>
     </figure>
 </div>
