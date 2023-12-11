@@ -1,7 +1,7 @@
 # ROSBot Harmony 1.0
-- Turtlebot3 and Niryo-Ned2 Working together
+Turtlebot3 and Niryo-Ned2 Working together
 
-#### ViBOT_2023/Group3: Nauman Shafique HASHMI, Atanda Abdullahi Adewale and Qian Zhiling
+ViBOT_2023/Group3: Nauman Shafique HASHMI, Atanda Abdullahi Adewale and Qian Zhiling
 
 ## Intro/Project Abstract:
 
@@ -19,7 +19,7 @@ TurtleBot3 is then tasked with moving until it detects a QR ArUco tag, at which 
 To enable communication between the PC, acting as the ROS master, and TurtleBot3 as well as Niryo, the ROS_MASTER_URI and ROS_IP parameters on both robots are set to the PC's IP address to form a ROS network group, facilitating the exchange of information through ROS topics
 <p>
 
-
+# Part 1:
 ## Camera Calibration:
 
 No camera is 100% perfect, each comes with inherent imperfections, often stemming from aberrations caused by faulty lenses or assembly defects in camera parts. Primarily, lens-related distortions manifest as radial and tangential distortions. Radial distortions, namely Barrel and Pincushion distortions, are prevalent. These deviations hinder the preservation of straight or parallel lines, causing them to seemingly converge towards infinity, termed as the Vanishing Point.
@@ -103,14 +103,16 @@ And tangential distortion:
     </figure>
     
 </div>
-#### This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture
 
-<h1><b>PART 2</b></h1>
+<p>This picture for intrinsic calibration taken from emanual.robotis.com for our explanation purposes. We had exactly the same result but missed to take picture</p>
+
+# Part 2:
 
 ### Lane Detection 
 <p>
 Once the calibraiton process is done, we are good to go for lane detection. At this point, creating an optimal lighting environment is pivotal for effective lane detection in TurtleBot3 operations. Because variations in luminance across the track present a significant challenge, with certain sections experiencing excessive light resulting in glare, while others remain comparatively darker. 
 </p>
+
 <p>
 This discrepancy necessitates individualized HSL parameter configurations rather than a universal setting in the robotics lab for every lighting condition. Extensive trials involving diverse light combinations were conducted in an attempt to balance the illumination across all track sections, yet none proved successful. However, barring the use of dual projection lights. These lights provided the flexibility to adjust orientation and intensity, enabling uniform illumination overthe entire track.
 For tuning the camera parameters We operated on 5600k temperature with 100% intensity value.
@@ -132,7 +134,7 @@ Algorithm Steps
 ### Lane Detection Results
 ![Qian!](/images/detected_lanes.png "bla")
 
--Algorithm Steps
+- <b>Algorithm Steps</b>
 <p>
 Autorace package detect the lanes (yellow and white) using thresholding. The thresholding is performed based on the low and high HSL values of both the lanes. Every pixel value below the lower threshold replaced with  ‘0’ black pixel and very pixel value above the thresholding is turned to ‘1’ white pixel, thus resulting in a binary image. Now that we have binary images for both the lanes, the next step is creating a masks of those lanes which serve as ROI for further processing.
 After having the masked values, bitwise AND operations is performed between the original HSL image and masked images, this will result in filtering out each colored lane.
