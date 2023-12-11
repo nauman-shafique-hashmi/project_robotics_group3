@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+
+from pyniryo import *
+import sys
+import rospy
+# from niryo_robot_python_ros_wrapper.ros_wrapper import *
+
+############################################################################################
+from robot_com.msg import Connectniryo#replace packagename and connectniryo to real case
+#remember to modify the cmaklist and package.xml
+#to launch this node,find the launch file of autorace,then add the niryo_connection node before the control lane node
+#then we can launch 2 nodes (niryo and turtle) at the same time using the same launch command
+############################################################################################
+
+class NiryoConnection:
+   def __init__(self):
+      rospy.init_node('niryo_connection', anonymous=True)
+
+      self.sub_niryo = rospy.Subscriber('/channel_turtle_niryo', Connectniryo, self.niryoCallBack, queue_size = 1)
+      self.pub_niryo = rospy.Publisher('/channel_turtle_niryo', Connectniryo, queue_size=10)
+      
+      rospy.spin()
+      
+   def niryoCallBack(self, msg):
+      
+      try:
+        if msg.detected:
+            robot = NiryoRobot("192.168.0.150")
+
+            robot.calibrate_auto()
+
+            # Move to an observation position then
+            robot.move_pose(*[-0.004, -0.155, 0.329, -0.09, 1.449, -1.7])
+            
+            # Try to do a vision pick
+            if robot.vision_pick('group3', 0/1000.0, ObjectShape.ANY, ObjectColor.ANY)[0]:
+                # If an object has been taken, do:
+                robot.place_from_pose(*[0.375, 0.028, 0.348, -0.021, 1.176, 0.015])
+                robot.move_pose(*[0.134, 0.009, 0.329, -0.29, 1.456, -0.097])
+
+            msg.detected = False
+            msg.finished = True
+            
+            self.pub_niryo.publish(msg)
+            # rospy.signal_shutdown("Task completed")  # Shutdown the ROS node after completing the task
+
+      except NiryoRobotException as e:
+         rospy.logerr("NiryoRobotException: {}".format(e))
+      
+      finally:
+         robot.close_connection()
+
+
+if __name__ == '__main__':
+   try:
+      niryoCon = NiryoConnection()
+      rospy.spin()
+
+   except rospy.ROSInterruptException:
+      pass
+
