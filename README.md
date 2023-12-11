@@ -196,13 +196,112 @@ After having the masked values, bitwise AND operations is performed between the 
                 self.pub_image_white_lane.publish(self.cvBridge.cv2_to_imgmsg(mask, "bgr8"))
 
         return fraction_num, mask
+        
 <p>
-
 The next step is marking those filtered lanes. AutoRace does this using two methods:
 - Fitting a second order polynomial line in the detected lanes using the existing coefficient of the lane
--using sliding window method. 
+- using sliding window method. 
 </p>
+    def fit_from_lines(self, lane_fit, image):
+        nonzero = image.nonzero()
+        nonzeroy = np.array(nonzero[0])
+        nonzerox = np.array(nonzero[1])
+        margin = 100
+        lane_inds = ((nonzerox > (lane_fit[0] * (nonzeroy ** 2) + lane_fit[1] * nonzeroy + lane_fit[2] - margin)) & (
+        nonzerox < (lane_fit[0] * (nonzeroy ** 2) + lane_fit[1] * nonzeroy + lane_fit[2] + margin)))
 
+        # Again, extract line pixel positions
+        x = nonzerox[lane_inds]
+        y = nonzeroy[lane_inds]
+
+        # Fit a second order polynomial to each
+        lane_fit = np.polyfit(y, x, 2)
+
+        # Generate x and y values for plotting
+        ploty = np.linspace(0, image.shape[0] - 1, image.shape[0])
+        lane_fitx = lane_fit[0] * ploty ** 2 + lane_fit[1] * ploty + lane_fit[2]
+            
+        return lane_fitx, lane_fit
+
+    def sliding_windown(self, img_w, left_or_right):
+        histogram = np.sum(img_w[int(img_w.shape[0] / 2):, :], axis=0)
+
+        # Create an output image to draw on and visualize the result
+        out_img = np.dstack((img_w, img_w, img_w)) * 255
+
+        # Find the peak of the left and right halves of the histogram
+        # These will be the starting point for the left and right lines
+        midpoint = np.int(histogram.shape[0] / 2)
+
+        if left_or_right == 'left':
+            lane_base = np.argmax(histogram[:midpoint])
+        elif left_or_right == 'right':
+            lane_base = np.argmax(histogram[midpoint:]) + midpoint
+
+        # Choose the number of sliding windows
+        nwindows = 20
+
+        # Set height of windows
+        window_height = np.int(img_w.shape[0] / nwindows)
+
+        # Identify the x and y positions of all nonzero pixels in the image
+        nonzero = img_w.nonzero()
+        nonzeroy = np.array(nonzero[0])
+        nonzerox = np.array(nonzero[1])
+
+        # Current positions to be updated for each window
+        x_current = lane_base
+
+        # Set the width of the windows +/- margin
+        margin = 50
+
+        # Set minimum number of pixels found to recenter window
+        minpix = 50
+
+        # Create empty lists to receive lane pixel indices
+        lane_inds = []
+
+        # Step through the windows one by one
+        for window in range(nwindows):
+            # Identify window boundaries in x and y
+            win_y_low = img_w.shape[0] - (window + 1) * window_height
+            win_y_high = img_w.shape[0] - window * window_height
+            win_x_low = x_current - margin
+            win_x_high = x_current + margin
+
+            # Draw the windows on the visualization image
+            cv2.rectangle(out_img, (win_x_low, win_y_low), (win_x_high, win_y_high), (0, 255, 0), 2)
+
+            # Identify the nonzero pixels in x and y within the window
+            good_lane_inds = ((nonzeroy >= win_y_low) & (nonzeroy < win_y_high) & (nonzerox >= win_x_low) & (
+                nonzerox < win_x_high)).nonzero()[0]
+
+            # Append these indices to the lists
+            lane_inds.append(good_lane_inds)
+
+            # If you found > minpix pixels, recenter next window on their mean position
+            if len(good_lane_inds) > minpix:
+                x_current = np.int(np.mean(nonzerox[good_lane_inds]))
+
+        # Concatenate the arrays of indices
+        lane_inds = np.concatenate(lane_inds)
+
+        # Extract line pixel positions
+        x = nonzerox[lane_inds]
+        y = nonzeroy[lane_inds]
+
+        # Fit a second order polynomial to each
+        try:
+            lane_fit = np.polyfit(y, x, 2)
+            self.lane_fit_bef = lane_fit
+        except:
+            lane_fit = self.lane_fit_bef
+
+        # Generate x and y values for plotting
+        ploty = np.linspace(0, img_w.shape[0] - 1, img_w.shape[0])
+        lane_fitx = lane_fit[0] * ploty ** 2 + lane_fit[1] * ploty + lane_fit[2]
+
+        return lane_fitx, lane_fit
 
 
 # To Run this code
