@@ -99,7 +99,7 @@ And tangential distortion:
 
 <div style="display: flex; justify-content: center;">
     <figure>
-        <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: 400px;" />
+        <img src="images/extrinsic_calibration.png" alt="Image 2" style="width: 300px; height: 300px;" />
         <figcaption>camera perspective</figcaption>
     </figure>
      <figure>
